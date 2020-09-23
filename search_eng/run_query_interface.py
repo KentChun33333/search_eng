@@ -3,7 +3,6 @@ from flask import Flask, render_template
 from flask import request
 from web_query.queryer import Querier, TrieNodeDB
 
-
 app = Flask(__name__, template_folder='web_query/front')
 query_agent = Querier()
 
@@ -38,7 +37,6 @@ def index():
                        )
     #  SQLite objects created in a thread can only be used in that same thread
     return render_template('index.html', errors=errors, results=results)
-
 
 if __name__ == '__main__':
     app.run()

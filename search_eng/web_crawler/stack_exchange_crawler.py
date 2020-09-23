@@ -65,14 +65,7 @@ class PageDBAStackExchange(Page):
         super().__init__()
 
     def run(self):
-        # open web-driver 
-        # action-ops-chain -> get data -> action -> get data ... iterative  
-        #                        |                        
-        #                  -> parser             -> parser ... 
-        #                        |                     | 
-        #                  -> forward indexing   -> forward indexing 
-        #                  -> to DB              -> to DB
-        # question : how to do it parallel 
+
         for i in range(36, 1000):
             url = f'https://dba.stackexchange.com/questions?tab=newest&page={i}'
             self.driver.get(url)
@@ -94,8 +87,6 @@ class PageDBAStackExchange(Page):
         for i in [titles, title_links, docs]:
             print(len(i))
 
-    def key_word_extraction():
-        pass 
 
 class PageStackoverflowQuestion(Page):
     'https://stackoverflow.com/questions?tab=Votes'
@@ -104,7 +95,7 @@ class PageStackoverflowQuestion(Page):
         super().__init__()
 
     def run(self):
-        for i in tqdm(range(2800, 100000)):
+        for i in tqdm(range(0, 100000)):
             url = f'https://stackoverflow.com/questions?tab=votes&page={i}&pagesize=50'
             self.driver.get(url)
             data = self.driver.page_source
@@ -159,6 +150,6 @@ if __name__ == "__main__":
     ag = PageStackoverflowQuestion()
     ag.run()
 
-# driver = get_driver
-# driver.get("https://dba.stackexchange.com/questions")
-# https://dba.stackexchange.com/questions?tab=newest&page=6
+    # driver = get_driver
+    # driver.get("https://dba.stackexchange.com/questions")
+    # https://dba.stackexchange.com/questions?tab=newest&page=6

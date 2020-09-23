@@ -21,7 +21,7 @@ class TxtPreprocess():
         stop_words = set(stopwords.words("english"))
 
         new_words = [
-                     "also", "iv", "one", "two", 
+                     "also", "iv"
                      ]
 
         self.stopword = stop_words.union(new_words)

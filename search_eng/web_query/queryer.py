@@ -2,7 +2,6 @@ import pickle
 from run_model_indexier import TrieNodeDB
 from model_indexier.txt_preprocess import TxtPreprocess
 from database_agent import URLTable
-import argparse
 from collections import Counter
 import config 
 
@@ -11,7 +10,6 @@ class Querier():
         self.database = pickle.load(open(config.inverted_database, 'rb'))
         self.txt_agent = TxtPreprocess()
         
-
     def get_candidates(self, query: 'txt'):
         res_q = self.txt_agent.transform(query)
         res_q = res_q['lemm']

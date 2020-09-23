@@ -1,9 +1,8 @@
 
 from model_indexier.txt_preprocess import (TxtPreprocess, 
-KeyWordCountFrequency, Doc2Vector300D) 
+                   KeyWordCountFrequency, Doc2Vector300D) 
 
 from database_agent import URLTable
-
 from concurrent.futures import ThreadPoolExecutor
 import pickle, collections, os
 from tqdm import tqdm 
@@ -58,10 +57,6 @@ class TrieNodeDB:
             cur_chid = cur_node.children
         return cur_node.val       
 
-
-# to storage for vector-space-model
-# the key is how to index it so that we can retrival fast 
-# 
 def get_inverted_key_word_db():
     pth = config.inverted_database
     if not os.path.exists(pth):
