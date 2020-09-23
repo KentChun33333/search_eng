@@ -10,7 +10,7 @@ A simple search system that mostly written in python. Typically, search/recommen
 
 - Using *selenium* and *beautifulsoup4* to fetch the data from https://stackoverflow.com that mostly related to database. In addition, currently only crawling the title as document for storage concerns. Using *sqlite3* as forward-database. 
 
-  ![image-20200923225222753](doc\forward_db.png)
+  <img src="doc\forward_db.png">
 
   
 
@@ -35,7 +35,7 @@ A simple search system that mostly written in python. Typically, search/recommen
 
 - Using Flask and Jinja template with bootstrap UI framework. 
 
-  ![image-20200922102507130](doc\demo.gif)
+  <img src="doc\demo.gif"> 
 
 
 
@@ -61,11 +61,9 @@ A simple search system that mostly written in python. Typically, search/recommen
 
 Current result just using traditional bool query, and not counting lots features like voting, user persona, content of question, and content of reply answers. 
 
-|                                             |                                           |
-| ------------------------------------------- | ----------------------------------------- |
-| ![image-20200922102558811](doc\image_2.png) | ![image-20200922102558811](doc\image.png) |
-
-
+| This Repo                   | Original Website          |
+| --------------------------- | ------------------------- |
+| <img src="doc\image_2.png"> | <img src="doc\image.png"> |
 
 
 # 4. Further Improvement 
