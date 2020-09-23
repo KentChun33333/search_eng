@@ -8,13 +8,13 @@ A simple search system that mostly written in python. Typically, search/recommen
 
 ## 1.1 Web Crawler 
 
-- Using *selenium* and *beautifulsoup4* to fetch the data from https://stackoverflow.com that mostly related to database. In addition, currently only crawling the title as document for storage concerns. Using *sqlite3* as forward-database. 
+- Using *selenium* and *beautifulsoup4* to fetch the data from https://stackoverflow.com that mostly related to database. In addition, currently only crawling the title as document for storage concerns. This reop use *sqlite3* as forward-database for simplicity. 
 
   <img src="doc\forward_db.png">
 
   
 
-## 1.2 Indexer
+## 1.2 Indexing
 
 - Using *nltk* and *gensim* to do the text normalization, stemming, lemmatization and doc2vec. 
 
@@ -71,5 +71,5 @@ Current result just using traditional bool query, and not counting lots features
   - **Model-based recall mechanism**:  Personally, I also build the vectors database of title-text, however not index it yet for fast-read. There are some ways to index the dense-vector database via some clustering or quantization methods. I would like to try some of them after more understanding of them.  Also, I am not sure how much improvement would it bring to the overall performance.
   - **Ranking model**: Since having no feasible dataset to train on, there is no ranking model here. However, the ranking/suggestion model is definitely one of key component of the search/recommend system.  
   - **Distributed Storage**: we definitely can shading the database, both on forward-database and inverted database.
-  - **Crawling for more content: ** Due to storage limitations, I treat the title of the document as entire document. However, we could also crawling and parsing content as well.
-  - **Advanced Indexing method: ** if the data is large, we may need to do some compression on index. In addition, for dense vector-based search/recommend system, we may need to using clustering/product quantization plus multi-index method to index the database. There are several famous method like Non-Orthogonal Inverted Multi-Index or IVFADC.
+  - **Crawling for more content**: Due to storage limitations, I treat the title of the document as entire document. However, we could also crawling and parsing content as well.
+  - **Advanced Indexing method**: if the data is large, we may need to do some compression on index. In addition, for dense vector-based search/recommend system, we may need to using clustering/product quantization plus multi-index method to index the database. There are several famous method like Non-Orthogonal Inverted Multi-Index or IVFADC.
