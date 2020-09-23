@@ -1,0 +1,6 @@
+*.npy
+*.pkl
+*.bin
+*.db
+*.exe
+*.pyc
