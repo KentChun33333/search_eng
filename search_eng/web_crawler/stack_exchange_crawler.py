@@ -95,7 +95,7 @@ class PageStackoverflowQuestion(Page):
         super().__init__()
 
     def run(self):
-        for i in tqdm(range(0, 100000)):
+        for i in tqdm(range(28000, 100000)):
             url = f'https://stackoverflow.com/questions?tab=votes&page={i}&pagesize=50'
             self.driver.get(url)
             data = self.driver.page_source

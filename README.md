@@ -1,6 +1,6 @@
 # 1. Project Introduction 
 
-A simple search system that mostly written in python. Typically, search/recommend system would including several key components (1) Web Crawler (2) Indexing (3) Recall model/mechanism (4) Ranking model (5) Query Web-Interface. Since lacking of training data, I don't have rank model at the moment. 
+A simple search system that mostly written in python. Typically, search/recommend system would including several key components (1) Web Crawler (2) Indexing (3) Recall model/mechanism (4) Rank model (5) Query Web-Interface. 
 
 <img src="doc\system_flow.png" alt="image-20200924000928319" style="zoom:75%;" />
 
@@ -31,7 +31,17 @@ A simple search system that mostly written in python. Typically, search/recommen
 
 - Here using traditional bool-query.  It could be further enhance with term-frequency or even a model to recall the candidates.
 
-## 1.4 Query Interface
+  
+
+## 1.4 Ranking Model / Mechanism
+
+- Here using Doc2Vec from *gensim*. The pretrained weight is from https://github.com/jhlau/doc2vec. 
+
+- The idea is to recommend the item base on vector similarity after recall-model.
+
+  
+
+## 1.5 Query Interface
 
 - Using Flask and Jinja template with bootstrap UI framework. 
 
@@ -46,7 +56,7 @@ A simple search system that mostly written in python. Typically, search/recommen
   - It should align with the config.py
 - python **run_web_crawler.py** 
   - It would create a forward database and storing blob in local machine.
-- python **run_model_indexier.py** 
+- python **run_model_indexer.py** 
   - It would run text normalization and then build the inverted-index object. 
 - python **run_query_interface.py**
   - It would run a flask server on localhost:5000. 
@@ -69,7 +79,7 @@ Current result just using traditional bool query, and not counting lots features
 # 4. Further Improvement 
 - There are lots of things we could improve on and play with:
   - **Model-based recall mechanism**:  Personally, I also build the vectors database of title-text, however not index it yet for fast-read. There are some ways to index the dense-vector database via some clustering or quantization methods. I would like to try some of them after more understanding of them.  Also, I am not sure how much improvement would it bring to the overall performance.
-  - **Ranking model**: Since having no feasible dataset to train on, there is no ranking model here. However, the ranking/suggestion model is definitely one of key component of the search/recommend system.  
+  - **Stronger Ranking model**: There are many rooms to improve the ranking model, like taking extra-features into the model or using a better model.  
   - **Distributed Storage**: we definitely can shading the database, both on forward-database and inverted database.
   - **Crawling for more content**: Due to storage limitations, I treat the title of the document as entire document. However, we could also crawling and parsing content as well.
   - **Advanced Indexing method**: if the data is large, we may need to do some compression on index. In addition, for dense vector-based search/recommend system, we may need to using clustering/product quantization plus multi-index method to index the database. There are several famous method like Non-Orthogonal Inverted Multi-Index or IVFADC.

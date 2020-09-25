@@ -1,5 +1,5 @@
 
-from model_indexier.txt_preprocess import (TxtPreprocess, 
+from model_indexer import (TxtPreprocess, 
                    KeyWordCountFrequency, Doc2Vector300D) 
 
 from database_agent import URLTable
@@ -66,7 +66,7 @@ def get_inverted_key_word_db():
     
 def get_doc_vec_db():
     # simple dictionary 
-    pth = 'data/sqldb/doc_vec_db.pkl'
+    pth = config.doc_vec_db
     if not os.path.exists(pth):
         return {}
     else:
@@ -90,7 +90,7 @@ def main():
     doc_vec_db = get_doc_vec_db()
     ind = 0 
     minibatch_size = 10000
-    genobj = url_table.get_to_indexier_top_K(minibatch_size)
+    genobj = url_table.get_to_indexer_top_K(minibatch_size)
     while len(genobj)>0:
         print(f'minibatch {ind}')
         for save_pth, url_guid, doc_id in tqdm(genobj):
@@ -115,8 +115,8 @@ def main():
             url_table.udpate_status(url_guid)
             ind+=1
         pickle.dump(inverted_key_word_db, open(config.inverted_database, 'wb'))
-        pickle.dump(doc_vec_db, open(config.inverted_doc_vec_db, 'wb'))
-        genobj = url_table.get_to_indexier_top_K(minibatch_size)
+        pickle.dump(doc_vec_db, open(config.doc_vec_db, 'wb'))
+        genobj = url_table.get_to_indexer_top_K(minibatch_size)
 
 
 if __name__ == '__main__':

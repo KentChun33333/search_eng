@@ -1,0 +1,1 @@
+from model_rank.cosine_doc_vec import RankModelDocVec

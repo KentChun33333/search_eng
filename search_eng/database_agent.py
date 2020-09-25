@@ -11,7 +11,7 @@ def run_thread(num_worker, func, **argv):
 
 class DataBaseSqlite3():
     def __init__(self, sqlite3_connstr='example.db'):
-        print(sqlite3_connstr)
+        #print(sqlite3_connstr)
         self.conn = sqlite3.connect(sqlite3_connstr)
         self.cursor = self.conn.cursor()
 
@@ -61,7 +61,7 @@ class URLTable(DataBaseSqlite3):
         self.cursor.execute(sql_string)
         self.conn.commit()
 
-    def get_to_indexier_top_K(self, numK):
+    def get_to_indexer_top_K(self, numK):
         sql_string = f'''SELECT save_pth, url_guid, ID FROM "{self.table_name}" 
                              WHERE status != 1 Limit {numK}'''  
         self.cursor.execute(sql_string)

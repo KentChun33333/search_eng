@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template
 from flask import request
-from web_query.queryer import Querier, TrieNodeDB
+from web_query.querier import Querier, TrieNodeDB
 
 app = Flask(__name__, template_folder='web_query/front')
 query_agent = Querier()
