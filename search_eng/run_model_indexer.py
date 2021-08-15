@@ -1,6 +1,6 @@
 
 from model_indexer import (TxtPreprocess, 
-                   KeyWordCountFrequency, Doc2Vector300D) 
+                   KeyWordCountFrequency) 
 
 from database_agent import URLTable
 from concurrent.futures import ThreadPoolExecutor
@@ -84,10 +84,10 @@ def main():
     url_table = URLTable()
     txt_processor = TxtPreprocess()
     key_word = KeyWordCountFrequency()
-    doc_vec = Doc2Vector300D()
+    #doc_vec = Doc2Vector300D()
 
     inverted_key_word_db = get_inverted_key_word_db()
-    doc_vec_db = get_doc_vec_db()
+    #doc_vec_db = get_doc_vec_db()
     ind = 0 
     minibatch_size = 10000
     genobj = url_table.get_to_indexer_top_K(minibatch_size)
@@ -97,7 +97,7 @@ def main():
             doc = pickle.load(open(save_pth, 'rb')) 
             nor_doc_dict = txt_processor.transform(doc)
             key_word_resdict = key_word.extrat_feat(nor_doc_dict)
-            doc_vec_resdict = doc_vec.extrat_feat(nor_doc_dict)
+            # doc_vec_resdict = doc_vec.extrat_feat(nor_doc_dict)
                     
             # key_word_resdict  word : (repeatence, term-frequency) 
             # for ex : {'postgr': (1, 0.2), 'sql': (1, 0.2),}
@@ -109,13 +109,12 @@ def main():
                     word, (doc_id, repeatence, round(term_freq, 6)))
 
             # update doc id 
-            doc_vec_db.update(
-                {doc_id: doc_vec_resdict['docvec_lemm']})
+            # doc_vec_db.update( {doc_id: doc_vec_resdict['docvec_lemm']})
              
             url_table.udpate_status(url_guid)
             ind+=1
         pickle.dump(inverted_key_word_db, open(config.inverted_database, 'wb'))
-        pickle.dump(doc_vec_db, open(config.doc_vec_db, 'wb'))
+        # pickle.dump(doc_vec_db, open(config.doc_vec_db, 'wb'))
         genobj = url_table.get_to_indexer_top_K(minibatch_size)
 
 
