@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+
 import time 
 from concurrent.futures import ThreadPoolExecutor
 from bs4 import BeautifulSoup
@@ -20,22 +22,25 @@ def run_thread(num_worker, func, **argv):
     executor.shutdown(wait=False) 
 
 class Page():
-    def __init__(self, hide=True):
+    def __init__(self, hide=0):
         self.driver =self.get_driver(hide)
         self.save_dir = self.get_data_dir()
         
         self.cols = ["url", "url_guid", "url_len", 
                     "title_len", "save_pth", "status"]
 
-    def get_driver(self, hide=True):
+    def get_driver(self, hide):
         # Define Browser Options
         chrome_options = Options()
         
         if hide:
             chrome_options.add_argument("--headless") # Hides the browser window
-        driver = webdriver.Chrome(
-            executable_path = self.get_driver_pth() , 
-            options=chrome_options)
+        
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+
+        # driver = webdriver.Chrome(
+            # executable_path = self.get_driver_pth() , 
+            # options=chrome_options)
         return driver
 
     def get_driver_pth(self):
